@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 import {BookItem} from './book_item.js';
 
 class BookList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: mockBooks,
+      data: this._addKeysToBooks(mockBooks),
     };
   }
 
@@ -20,14 +20,16 @@ class BookList extends Component {
     );
   };
 
+  _addKeysToBooks = books =>
+    books.map(book =>
+      Object.assign(book, {key: `${book.title}_${book.author}`}),
+    );
+
   render() {
+    console.log(this.state.data);
     return (
       <View style={styles.container}>
-        <FlatList
-          data={this.state.data}
-          renderItem={this._renderItem}
-          keyExtractor={item => `${item.rank}_${item.title}`}
-        />
+        <FlatList data={this.state.data} renderItem={this._renderItem} />
       </View>
     );
   }
