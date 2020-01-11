@@ -7,6 +7,7 @@ class BookItem extends Component {
       <View style={styles.bookItem}>
         <Image style={styles.cover} source={{uri: this.props.image_url}} />
         <View style={styles.info}>
+          <Text style={styles.rank}>{`#${this.props.rank}`}</Text>
           <Text style={styles.author}>{this.props.author}</Text>
           <Text style={styles.title}>{this.props.title}</Text>
         </View>
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
   },
   author: {fontSize: 18},
   title: {fontSize: 18, fontWeight: 'bold'},
+  rank: {fontSize: 18, fontStyle: 'italic'},
 });
 
 export {BookItem};
