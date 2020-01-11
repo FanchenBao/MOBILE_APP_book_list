@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
+import {Author, Title, Rank} from './text_tag.js';
 
 class BookItem extends Component {
   render() {
@@ -7,9 +8,9 @@ class BookItem extends Component {
       <View style={styles.bookItem}>
         <Image style={styles.cover} source={{uri: this.props.image_url}} />
         <View style={styles.info}>
-          <Text style={styles.rank}>{`#${this.props.rank}`}</Text>
-          <Text style={styles.author}>{this.props.author}</Text>
-          <Text style={styles.title}>{this.props.title}</Text>
+          <Rank>{`#${this.props.rank}`}</Rank>
+          <Author>{this.props.author}</Author>
+          <Title>{this.props.title}</Title>
         </View>
       </View>
     );
@@ -19,7 +20,6 @@ class BookItem extends Component {
 const styles = StyleSheet.create({
   bookItem: {
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
     borderBottomColor: '#AAAAAA',
     borderBottomWidth: 2,
     padding: 20,
@@ -41,9 +41,6 @@ const styles = StyleSheet.create({
     // borderColor: 'black',
     // borderWidth: 2,
   },
-  author: {fontSize: 18},
-  title: {fontSize: 18, fontWeight: 'bold'},
-  rank: {fontSize: 18, fontStyle: 'italic'},
 });
 
 export {BookItem};

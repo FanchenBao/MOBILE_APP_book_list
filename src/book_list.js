@@ -6,7 +6,8 @@ import {
   Text,
   TouchableHighlight,
 } from 'react-native';
-import {BookItem} from './book_item.js';
+import {BookItem} from './components/book_item.js';
+import {ExtraInfoView} from './components/extra_info.js';
 import {fetchBooks} from './fetch_books.js';
 import update from 'immutability-helper';
 
@@ -41,11 +42,28 @@ class BookList extends Component {
     });
   }
 
+  _renderExtraInfo(item) {
+    if (item.showInfo) {
+      return (
+        <ExtraInfoView
+          description={item.description}
+          publisher={item.publisher}
+          amazon_product_url={item.amazon_product_url}
+        />
+      );
+    } else {
+      return null;
+    }
+  }
+
   _renderItem = ({item, index, section}) => {
     // console.log(index, item.showInfo);
     return (
       <View>
-        <TouchableHighlight onPress={() => this._onPress(section, index)}>
+        <TouchableHighlight
+          onPress={() => this._onPress(section, index)}
+          underlayColor={'#e6e6e6'}
+          style={styles.touchable}>
           <BookItem
             image_url={item.book_image}
             author={item.author}
@@ -53,7 +71,7 @@ class BookList extends Component {
             rank={item.rank}
           />
         </TouchableHighlight>
-        <Text>{item.showInfo ? 'hello' : 'world'}</Text>
+        {this._renderExtraInfo(item)}
       </View>
     );
   };
@@ -123,6 +141,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: 'lightgrey',
     padding: 10,
+  },
+  touchable: {
+    backgroundColor: 'white',
   },
 });
 
