@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, TouchableHighlight, Linking} from 'react-native';
 import {ExtraInfo, ExtraInfoName, ButtonText} from './text_tag.js';
 
+/** A class to provide rendering for extra info of each book */
 class ExtraInfoView extends Component {
   _row(name, info) {
     return (
@@ -12,6 +13,16 @@ class ExtraInfoView extends Component {
     );
   }
 
+  /**
+   * Helper function to go to the specified URL from within the app.
+   *
+   * This function first checks whether the device can or cannot open the given
+   * URL. If it can, it proceeds to open it in whatever default browser used
+   * on the device. Otherwise, it reports error. For more details about the
+   * functions `canOpenURL` and `openURL`, refer to their doc.
+   *
+   * @param {string} url The URL to visit.
+   */
   async _goToURL(url) {
     try {
       let urlVerdict = await Linking.canOpenURL(url);

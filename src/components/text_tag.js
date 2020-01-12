@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text} from 'react-native';
 
+/** Text tag for author */
 class Author extends Component {
   render() {
     return <Text style={styles.mediumText}>{this.props.children}</Text>;
   }
 }
 
+/** Text tag for book title */
 class Title extends Component {
   render() {
     return (
@@ -17,6 +19,7 @@ class Title extends Component {
   }
 }
 
+/** Text tag for book rank */
 class Rank extends Component {
   render() {
     return (
@@ -27,18 +30,24 @@ class Rank extends Component {
   }
 }
 
+/** Text tag for extra info content of a book */
 class ExtraInfo extends Component {
   render() {
     return <Text style={styles.extrainfo}>{this.props.children}</Text>;
   }
 }
 
+/**
+ * Text tag for the name of each extra info category, e.g. description,
+ * publisher.
+ */
 class ExtraInfoName extends Component {
   render() {
     return <Text style={styles.extrainfoname}>{this.props.children}</Text>;
   }
 }
 
+/** Text tag for the text within a button */
 class ButtonText extends Component {
   render() {
     return <Text style={styles.buttonText}>{this.props.children}</Text>;

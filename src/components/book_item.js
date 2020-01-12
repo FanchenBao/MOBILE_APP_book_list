@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Image} from 'react-native';
 import {Author, Title, Rank} from './text_tag.js';
 
+/** A class to render each book item on the SectionList */
 class BookItem extends Component {
   render() {
     return (

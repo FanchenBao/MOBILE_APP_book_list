@@ -11,6 +11,7 @@ import {ExtraInfoView} from './components/extra_info.js';
 import {fetchBooks} from './fetch_books.js';
 import update from 'immutability-helper';
 
+/** Main class for the app */
 class BookList extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +20,14 @@ class BookList extends Component {
     };
   }
 
+  /**
+   * Callback when an item of the section list is pressed.
+   *
+   * This callback updates the "showInfo" state of the specific item pressed.
+   * @param {*} section Representation of the section where press occurrs. This
+   * is needed to locate which section to update the state.
+   * @param {string} index The index of the item where press occurrs.
+   */
   _onPress(section, index) {
     // Acquire the index of the section within this.state.sections. This is
     // necessary because I don't know any other way to refer to the section in
@@ -42,6 +51,15 @@ class BookList extends Component {
     });
   }
 
+  /**
+   * A function to render extra info about a book.
+   *
+   * This function returns null if the "showInfo" state is false, but returns
+   * the extra info DOM (containing the books's description, publisher, and a
+   * button linking to the amazon page for purchase) when "showInfo" is set to
+   * true, which happens when user presses on the item.
+   * @param {*} item Representation of the specific item where press occurrs.
+   */
   _renderExtraInfo(item) {
     if (item.showInfo) {
       return (
@@ -56,8 +74,12 @@ class BookList extends Component {
     }
   }
 
+  /**
+   * Callback for "renderItem" prop in SectionList.
+   *
+   * It returns the DOM for each item.
+   */
   _renderItem = ({item, index, section}) => {
-    // console.log(index, item.showInfo);
     return (
       <View>
         <TouchableHighlight
@@ -76,15 +98,27 @@ class BookList extends Component {
     );
   };
 
+  /** Callback for "renderHeader" prop of SectionList */
   _renderHeader = ({section}) => {
     return <Text style={styles.headerText}>{section.title}</Text>;
   };
 
+  /**
+   * A function to add keys to each book item.
+   *
+   * Notice the use of Object.assign function to merge new key-value maps to the
+   * original one.
+   */
   _addKeysToBooks = books =>
     books.map(book =>
       Object.assign(book, {key: book.primary_isbn13, showInfo: false}),
     );
 
+  /**
+   * A function to asynchronously retrieve best seller book list
+   * data from an API, via the `fetchBooks` function. Once data are retrieved,
+   * they are set into the state.
+   */
   async _refreshData() {
     try {
       let allBooks = [
