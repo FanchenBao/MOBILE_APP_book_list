@@ -39,6 +39,12 @@ class ExtraInfoName extends Component {
   }
 }
 
+class ButtonText extends Component {
+  render() {
+    return <Text style={styles.buttonText}>{this.props.children}</Text>;
+  }
+}
+
 const styles = StyleSheet.create({
   smallText: {fontSize: 15},
   mediumText: {fontSize: 18},
@@ -56,6 +62,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     // marginLeft: 20,
   },
+  buttonText: {
+    fontSize: 15,
+    color: 'white',
+  },
 });
 
-export {Author, Title, Rank, ExtraInfo, ExtraInfoName};
+export {Author, Title, Rank, ExtraInfo, ExtraInfoName, ButtonText};
