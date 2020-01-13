@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {StyleSheet, View, TouchableHighlight, Linking} from 'react-native';
 import {ExtraInfo, ExtraInfoName, ButtonText} from './text_tag.js';
 
 /** A class to provide rendering for extra info of each book */
-class ExtraInfoView extends Component {
+class ExtraInfoView extends PureComponent {
   _row(name, info) {
     return (
       <View style={styles.row}>
@@ -37,6 +37,7 @@ class ExtraInfoView extends Component {
   }
 
   render() {
+    // console.log(this.props.publisher);
     return (
       <View style={styles.container}>
         {this._row('Description', this.props.description)}

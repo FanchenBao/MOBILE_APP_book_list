@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {
   StyleSheet,
   View,
@@ -7,12 +7,12 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import {BookItem} from './components/book_item.js';
-import {ExtraInfoView} from './components/extra_info.js';
-import {fetchBooks} from './fetch_books.js';
+import {fetchBooks} from './functions/fetch_books.js';
 import update from 'immutability-helper';
+import {ExtraInfoView} from './components/extra_info.js';
 
 /** Main class for the app */
-class BookList extends Component {
+class BookList extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -80,6 +80,7 @@ class BookList extends Component {
    * It returns the DOM for each item.
    */
   _renderItem = ({item, index, section}) => {
+    // console.log(item.author);
     return (
       <View>
         <TouchableHighlight

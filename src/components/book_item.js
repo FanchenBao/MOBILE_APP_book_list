@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {StyleSheet, View, Image} from 'react-native';
 import {Author, Title, Rank} from './text_tag.js';
 
 /** A class to render each book item on the SectionList */
-class BookItem extends Component {
+class BookItem extends PureComponent {
   render() {
+    // console.log(this.props.author);
     return (
       <View style={styles.bookItem}>
         <Image style={styles.cover} source={{uri: this.props.image_url}} />
