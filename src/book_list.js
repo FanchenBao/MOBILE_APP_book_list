@@ -1,15 +1,10 @@
 import React, {PureComponent} from 'react';
-import {
-  StyleSheet,
-  View,
-  SectionList,
-  Text,
-  TouchableHighlight,
-} from 'react-native';
+import {StyleSheet, View, SectionList, Text} from 'react-native';
 import {BookItem} from './components/book_item.js';
 import {fetchBooks} from './functions/fetch_books.js';
 import update from 'immutability-helper';
 import {ExtraInfoView} from './components/extra_info.js';
+import {BookTouchable} from './components/book_touchable.js';
 
 /** Main class for the app */
 class BookList extends PureComponent {
@@ -24,23 +19,20 @@ class BookList extends PureComponent {
    * Callback when an item of the section list is pressed.
    *
    * This callback updates the "showInfo" state of the specific item pressed.
-   * @param {*} section Representation of the section where press occurrs. This
-   * is needed to locate which section to update the state.
-   * @param {string} index The index of the item where press occurrs.
+   * @param {string} sectionIndex Index of the section where the book item
+   * resides.
+   * @param {string} bookIndex Index of the book item within its section.
    */
-  _onPress(section, index) {
-    // Acquire the index of the section within this.state.sections. This is
-    // necessary because I don't know any other way to refer to the section in
-    // this.state.sections without using its index.
-    let sectionIndex = this.state.sections.indexOf(section);
+  _onPress = (sectionIndex, bookIndex) => {
     // Use update method (ref: https://github.com/kolodny/immutability-helper)
     // to toggle the 'showInfo' value of a specific item within a sepcific
     // section. Refer to `update` document for how its syntax work here.
+    // console.log(this.sectionIndex, this.bookIndex);
     this.setState({
       sections: update(this.state.sections, {
         [sectionIndex]: {
           data: {
-            [index]: {
+            [bookIndex]: {
               showInfo: function(x) {
                 return !x;
               },
@@ -49,7 +41,7 @@ class BookList extends PureComponent {
         },
       }),
     });
-  }
+  };
 
   /**
    * A function to render extra info about a book.
@@ -76,24 +68,22 @@ class BookList extends PureComponent {
 
   /**
    * Callback for "renderItem" prop in SectionList.
-   *
-   * It returns the DOM for each item.
+   * It produces the full elements for each book item.
    */
   _renderItem = ({item, index, section}) => {
-    // console.log(item.author);
     return (
       <View>
-        <TouchableHighlight
-          onPress={() => this._onPress(section, index)}
-          underlayColor={'#e6e6e6'}
-          style={styles.touchable}>
+        <BookTouchable
+          onPressCB={this._onPress}
+          bookIndex={index}
+          sectionIndex={this.state.sections.indexOf(section)}>
           <BookItem
             image_url={item.book_image}
             author={item.author}
             title={item.title}
             rank={item.rank}
           />
-        </TouchableHighlight>
+        </BookTouchable>
         {this._renderExtraInfo(item)}
       </View>
     );

@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {StyleSheet, Text} from 'react-native';
 
 /** Text tag for author */
-class Author extends Component {
+class Author extends PureComponent {
   render() {
     return <Text style={styles.mediumText}>{this.props.children}</Text>;
   }
 }
 
 /** Text tag for book title */
-class Title extends Component {
+class Title extends PureComponent {
   render() {
     return (
       <Text style={[styles.mediumText, styles.bold]}>
@@ -20,7 +20,7 @@ class Title extends Component {
 }
 
 /** Text tag for book rank */
-class Rank extends Component {
+class Rank extends PureComponent {
   render() {
     return (
       <Text style={[styles.mediumText, styles.italic]}>
@@ -31,7 +31,7 @@ class Rank extends Component {
 }
 
 /** Text tag for extra info content of a book */
-class ExtraInfo extends Component {
+class ExtraInfo extends PureComponent {
   render() {
     return <Text style={styles.extrainfo}>{this.props.children}</Text>;
   }
@@ -41,14 +41,14 @@ class ExtraInfo extends Component {
  * Text tag for the name of each extra info category, e.g. description,
  * publisher.
  */
-class ExtraInfoName extends Component {
+class ExtraInfoName extends PureComponent {
   render() {
     return <Text style={styles.extrainfoname}>{this.props.children}</Text>;
   }
 }
 
 /** Text tag for the text within a button */
-class ButtonText extends Component {
+class ButtonText extends PureComponent {
   render() {
     return <Text style={styles.buttonText}>{this.props.children}</Text>;
   }
